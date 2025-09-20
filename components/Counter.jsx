@@ -8,7 +8,7 @@ export function Counter({ value, setValue, color }) {
             <TouchableOpacity>
                 <MaterialDesignIcons
                     name={ICONS.MINUS}
-                    size={28}
+                    size={26}
                     color={color} />
             </TouchableOpacity>
             <Text style={[styles.text, color === COLORS.LIGHTEST && styles.textAlt]}>
@@ -17,7 +17,7 @@ export function Counter({ value, setValue, color }) {
             <TouchableOpacity>
                 <MaterialDesignIcons
                     name={ICONS.PLUS}
-                    size={28}
+                    size={26}
                     color={color} />
             </TouchableOpacity>
         </View>
@@ -27,15 +27,12 @@ export function Counter({ value, setValue, color }) {
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
-        justifyContent: 'center',
         alignItems: 'center',
-        gap: 8,
-        height: 40,
-        backgroundColor: 'transparent'
+        gap: 12
     },
     text: {
         fontFamily: FONTS.REGULAR,
-        fontSize: 20,
+        fontSize: 18,
         color: COLORS.PRIMARY,
         textTransform: 'capitalize'
     },

@@ -6,6 +6,7 @@ import { SecondaryButton } from '../components/SecondaryButton';
 import { Counter } from '../components/Counter';
 import { Loader } from '../components/Loader';
 import { ErrorMessage } from '../components/ErrorMessage';
+import { getPriceFormat } from '../utils/utils';
 import { COLORS, FONTS, ICONS } from '../utils/constants';
 import { images } from '../products';
 
@@ -28,10 +29,6 @@ export function DetailsScreen({ route }) {
             }
         });
         setPackageOptions(result);
-    }
-
-    const getPriceFormat = (value) => {
-        return `${value.toFixed(2)}€`;
     }
 
     async function getProductDetails() {

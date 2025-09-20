@@ -1,20 +1,19 @@
 import { ScrollView, StyleSheet, View, Text } from 'react-native';
-import { CatalogueItem } from '../components/CatalogueItem';
+import { CartItem } from '../components/CartItem';
 import { MaterialDesignIcons } from '@react-native-vector-icons/material-design-icons';
 import { COLORS, FONTS, ICONS } from '../utils/constants';
 
-const cartItems = [];
+const cartItems = [
+    { id: 1, title: 'Hazelnut', packaging: 500, quantity: 1, format: ICONS.BEANS, total: 100 },
+    { id: 2, title: 'Caramel', packaging: 100, quantity: 1, format: ICONS.BEANS, total: 500 },
+    { id: 3, title: 'Espresso deluxe', packaging: 300, quantity: 1, format: ICONS.GROUND, total: 300 },
+];
 
-export function CartScreen({ navigation }) {
+export function CartScreen() {
     return cartItems.length > 0
         ? <ScrollView contentContainerStyle={styles.fullCart}>
-            {cartItems.map(({id, image, title, price}) => (
-                <CatalogueItem
-                    key={id}
-                    image={image}
-                    title={title}
-                    price={price}
-                />
+            {cartItems.map((item) => (
+                <CartItem key={item.id} item={item} />
             ))}
         </ScrollView>
         : <View style={styles.emptyCart}>
@@ -31,12 +30,8 @@ export function CartScreen({ navigation }) {
 
 const styles = StyleSheet.create({
     fullCart: {
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        justifyContent: 'center',
-        alignItems: 'center',
         gap: 8,
-        padding: 8
+        padding: 16
     },
     emptyCart: {
         flex: 1,
