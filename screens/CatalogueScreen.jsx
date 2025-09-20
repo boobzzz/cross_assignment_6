@@ -1,38 +1,25 @@
+import { useEffect } from 'react';
 import { FlatList, StyleSheet } from 'react-native';
-import { useEffect, useState } from 'react';
-import { fetchProducts } from '../services/api';
+import { useDispatch, useSelector } from 'react-redux';
 import { CatalogueItem } from '../components/CatalogueItem';
 import { Loader } from '../components/Loader';
 import { ErrorMessage } from '../components/ErrorMessage';
+import { fetchProducts } from '../redux/productsOps';
 import { images } from '../products';
 
 export function CatalogueScreen() {
-    const [ products, setProducts ] = useState([]);
-    const [ loading, setLoading ] = useState(false);
-    const [ error, setError ] = useState('');
-
-    async function getProducts() {
-        try {
-            setError('');
-            setLoading(true);
-            const result = await fetchProducts();
-            setProducts(result);
-        } catch (err) {
-            setError(err.message);
-        } finally {
-            setLoading(false);
-        }
-    }
+    const { items, loading, error } = useSelector(state => state.products);
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        getProducts();
-    }, []);
+        dispatch(fetchProducts());
+    }, [dispatch]);
 
     return (
         <>
-            {products.length > 0 &&
+            {items.length > 0 &&
                 <FlatList
-                    data={products}
+                    data={items}
                     renderItem={({ item }) =>
                         <CatalogueItem
                             id={item.id}
